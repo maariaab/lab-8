@@ -1,5 +1,7 @@
 const mysql = require('mysql2/promise');
 const dns = require('dns');
+const fs = require('fs');
+const path = require('path');
 
 require('dotenv').config();
 
@@ -36,21 +38,19 @@ console.log('DB target:', {
 
 const dbConfig = {
 	host: process.env.DB_HOST,
-	port: Number(process.env.DB_PORT || 3306),
+	port: Number(process.env.DB_PORT),
 	user: process.env.DB_USER,
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_NAME,
 	multipleStatements: false,
 	namedPlaceholders: true,
-
-
-	
 	connectTimeout: 10000,
 	waitForConnections: true,
 	connectionLimit: 10,
 	queueLimit: 0,
-
-	ssl: {}
+	ssl: {
+		ca: process.env.DB_CA_CERT
+	}
 };
 
 const database = mysql.createPool(dbConfig);
