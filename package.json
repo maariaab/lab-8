@@ -1,16 +1,28 @@
 {
 	"name": "tutorial",
 	"version": "1.0.0",
+	"description": "",
+	"homepage": "https://github.com/maariaab/lab-8#readme",
+	"bugs": {
+		"url": "https://github.com/maariaab/lab-8/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/maariaab/lab-8.git"
+	},
+	"license": "ISC",
+	"author": "Patrick",
+	"type": "commonjs",
+	"main": "index.js",
 	"scripts": {
 		"start": "node index.js"
 	},
 	"dependencies": {
 		"bcrypt": "^5.1.1",
-		"dotenv": "^16.4.5",
-		"ejs": "^3.1.9",
+		"dotenv": "^16.6.1",
+		"ejs": "^3.1.10",
 		"express": "^4.18.3",
+		"express-session": "^1.19.0",
 		"mysql2": "^3.9.2"
-	},
-	"author": "Patrick",
-	"license": "ISC"
+	}
 }
