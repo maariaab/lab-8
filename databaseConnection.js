@@ -1,16 +1,28 @@
 const mysql = require('mysql2/promise');
+const dns = require('dns');
+
 require('dotenv').config();
 
-const dbConfigLocal = {
+dns.setDefaultResultOrder('ipv4first');
+
+const dbConfig = {
 	host: process.env.DB_HOST,
+	port: Number(process.env.DB_PORT || 3306),
 	user: process.env.DB_USER,
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_NAME,
 	multipleStatements: false,
-	namedPlaceholders: true
+	namedPlaceholders: true,
+
+	
+	connectTimeout: 10000,
+	waitForConnections: true,
+	connectionLimit: 10,
+	queueLimit: 0,
+
+	ssl: {}
 };
 
-var database = mysql.createPool(dbConfigLocal);
+const database = mysql.createPool(dbConfig);
 
 module.exports = database;
-		
