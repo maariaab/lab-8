@@ -5,8 +5,6 @@ require('dotenv').config();
 
 dns.setDefaultResultOrder('ipv4first');
 
-const mysql = require('mysql2/promise');
-
 async function testDb() {
   try {
     const conn = await mysql.createConnection({
