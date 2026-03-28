@@ -1,7 +1,29 @@
-require('dotenv').config(); 
+const { Sequelize } = require('sequelize');
+require('dotenv').config();
 
-const dbConfigLocal = `mysql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}`; 
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    dialect: 'mysql',
+    logging: console.log,
+    dialectOptions: {
+      ssl: {
+        ca: process.env.DB_CA_CERT
+      }
+    }
+  }
+);
 
-var databaseConnectionString = dbConfigLocal; 
+sequelize.authenticate()
+  .then(() => {
+    console.log('Sequelize connected successfully');
+  })
+  .catch((err) => {
+    console.error('Sequelize connection failed:', err);
+  });
 
-module.exports = databaseConnectionString;
+module.exports = sequelize;
