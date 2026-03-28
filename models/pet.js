@@ -1,6 +1,6 @@
 const {Sequelize, DataTypes} = require('sequelize'); 
 
-const sequelize = require('./databaseConnectionSequelize');
+const sequelize = require('../databaseConnectionSequelize');
 const userModel = include('models/web_user'); 
 
 const petModel = sequelize.define('pet', {
